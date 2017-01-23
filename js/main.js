@@ -1,5 +1,5 @@
-$(document).ready(function) {
-	// variables for speeds
+$(document).ready(function() {
+	// variables for speeds, fade speed, slider speed
 	var speed = 500
 	var autoswitch = true
 	var autoswitch_speed = 4000
@@ -11,34 +11,35 @@ $(document).ready(function) {
 	$('.slide').hide()
 
 	// Show first slide
-	$('.slide').show()
+	$('.active').show()
 
 	// Next Handler
-	$('#next').on('click', nexSlide)
+	$('#next').on('click', nextSlide)
 
 	// Prev Handler
+	$('#prev').on('click', prevSlide)
+	// Prev Handler
 	if(autoswitch == true) {
-		setInterval(nexSlide, autoswitch_speed)
+		setInterval(nextSlide,autoswitch_speed)
 	}
 
 	// Takes the active class off present slides and removes it, gives it to the next slide
 	function nextSlide() {
 		$('.active').removeClass('active').addClass('oldActive')
-			if($('oldActive').is(':last-child')) {
+			if($('.oldActive').is(':last-child')) {
 				$('.slide').first().addClass('active')
 			} else {
 				$('.oldActive').next().addClass('active')
-
 			}
 			$('.oldActive').removeClass('oldActive')
-			$('.slide').fadOut(speed)
+			$('.slide').fadeOut(speed)
 			$('.active').fadeIn(speed)
 	}
 
 	// Switch to Prev slide
 	function prevSlide() {
-		$('.active').removeclass('.active').addClass('oldActive')
-			if($('oldActive').is(':first-child')) {
+		$('.active').removeClass('active').addClass('oldActive')
+			if($('.oldActive').is(':first-child')) {
 				$('.slide').last().addClass('active')
 			} else {
 				$('.oldActive').prev().addClass('active')
